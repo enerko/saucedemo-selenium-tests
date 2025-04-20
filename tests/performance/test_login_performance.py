@@ -12,6 +12,8 @@ def setup(driver):
     yield driver
 
 def test_login_time(setup, username, password):
+    allure.dynamic.label("user", username)
+
     driver = setup
     login_page = LoginPage(driver)
 
@@ -26,6 +28,8 @@ def test_login_time(setup, username, password):
     assert login_duration <= max_login_time, f"{username} took more than {max_login_time} seconds to log in"
 
 def test_logout_time(setup, username, password):
+    allure.dynamic.label("user", username)
+    
     driver = setup
     login_page = LoginPage(driver)
 

@@ -1,11 +1,11 @@
 import pytest
+import allure
 
 from pages.products_page import ProductsPage
 from pages.login_page import LoginPage
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
 
 @pytest.fixture(scope="function")
 def setup(driver, username, password):
@@ -24,7 +24,10 @@ def setup(driver, username, password):
     except:
         pass  # Already removed or not present
 
-def test_ui_elements(setup):
+@allure.label("category", "ui")
+def test_ui_elements(setup, username):
+    allure.dynamic.label("user", username)
+
     driver = setup
 
     products_page = ProductsPage(driver)
@@ -32,8 +35,10 @@ def test_ui_elements(setup):
     assert driver.find_element(*products_page.cart_button).is_displayed(), f"Cart icon is missing"
     assert driver.find_element(*products_page.menu_button).is_displayed(), f"Menu button is missing"
 
+@allure.label("category", "ui")
+def test_images(setup, username):
+    allure.dynamic.label("user", username)
 
-def test_images(setup):
     driver = setup
 
     products_page = ProductsPage(driver)
@@ -41,7 +46,10 @@ def test_images(setup):
     for img in products_page.get_product_images():
         assert img.get_attribute("src") != "", f"Broken image detected"
 
-def test_responsive_layout(setup):
+@allure.label("category", "ui")
+def test_responsive_layout(setup, username):
+    allure.dynamic.label("user", username)
+
     driver = setup
 
     products_page = ProductsPage(driver)
@@ -54,7 +62,10 @@ def test_responsive_layout(setup):
     driver.set_window_size(1280, 800)
     assert driver.find_element(*products_page.cart_button).is_displayed(), f"Cart icon missing in desktop view"
 
-def test_text_style(setup):
+@allure.label("category", "ui")
+def test_text_style(setup, username):
+    allure.dynamic.label("user", username)
+
     driver = setup
 
     products_page = ProductsPage(driver)

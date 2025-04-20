@@ -1,0 +1,15 @@
+[
+    {
+      "name": "Functional",
+      "matchedLabels": ["category:functional"]
+    },
+    {
+      "name": "UI",
+      "matchedLabels": ["category:ui"]
+    },
+    {
+      "name": "Performance",
+      "matchedLabels": ["category:performance"]
+    }
+  ]
+  

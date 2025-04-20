@@ -1,6 +1,7 @@
 import csv
 import pytest
 import os
+import allure
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -33,7 +34,10 @@ def setup(driver, username, password):
     except:
         pass  # Already removed or not present
 
-def test_add_backpack(setup):
+@allure.label("category", "functional")
+def test_add_backpack(setup, username):
+    allure.dynamic.label("user", username)
+
     driver = setup
     products_page = ProductsPage(driver)
     
@@ -41,8 +45,10 @@ def test_add_backpack(setup):
 
     assert products_page.get_cart_count() == 1, f"Expected 1 item in cart, found {products_page.get_cart_count()}"
 
+@allure.label("category", "functional")
+def test_remove_backpack(setup, username):
+    allure.dynamic.label("user", username)
 
-def test_remove_backpack(setup):
     driver = setup
     products_page = ProductsPage(driver)
 
@@ -51,8 +57,10 @@ def test_remove_backpack(setup):
 
     assert products_page.is_cart_empty(), f"Expected cart to be empty, {products_page.get_cart_count()} still in cart"
 
+@allure.label("category", "functional")
+def test_continue_shopping(setup, username):
+    allure.dynamic.label("user", username)
 
-def test_continue_shopping(setup):
     driver = setup
     products_page = ProductsPage(driver)
 
@@ -66,8 +74,10 @@ def test_continue_shopping(setup):
 
     assert "Products" in driver.page_source
 
+@allure.label("category", "functional")
+def test_checkout(setup, username):
+    allure.dynamic.label("user", username)
 
-def test_checkout(setup):
     driver = setup
     products_page = ProductsPage(driver)
 
