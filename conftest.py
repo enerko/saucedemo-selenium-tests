@@ -40,3 +40,11 @@ def pytest_generate_tests(metafunc):
     if "username" in metafunc.fixturenames and "password" in metafunc.fixturenames:
         credentials = load_credentials_from_csv()
         metafunc.parametrize("username,password", credentials)
+
+
+def pytest_generate_tests(metafunc):
+    if "username" in metafunc.fixturenames and "password" in metafunc.fixturenames:
+        with open("data/credentials.csv", newline="") as csvfile:
+            credentials = load_credentials_from_csv()
+            ids = [user[0] for user in credentials]
+            metafunc.parametrize(("username", "password"), credentials, ids=ids)

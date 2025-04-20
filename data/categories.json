@@ -1,15 +1,22 @@
 [
-    {
-      "name": "Functional",
-      "matchedLabels": ["category:functional"]
-    },
-    {
-      "name": "UI",
-      "matchedLabels": ["category:ui"]
-    },
-    {
-      "name": "Performance",
-      "matchedLabels": ["category:performance"]
-    }
-  ]
-  
+  {
+    "name": "Pass",
+    "matchedStatuses": ["passed"]
+  },
+  {
+    "name": "Fail",
+    "matchedStatuses": ["failed"]
+  },
+  {
+    "name": "Functional",
+    "matchedLabels": ["category:functional"]
+  },
+  {
+    "name": "UI",
+    "matchedLabels": ["category:ui"]
+  },
+  {
+    "name": "Performance",
+    "matchedLabels": ["category:performance"]
+  }
+]
