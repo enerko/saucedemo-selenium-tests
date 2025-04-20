@@ -24,9 +24,10 @@ def setup(driver, username, password):
     except:
         pass  # Already removed or not present
 
-@allure.label("category", "ui")
+@allure.suite("UI Tests")
+@allure.title("All buttons are visible on the products page")
 def test_ui_elements(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
 
@@ -35,9 +36,10 @@ def test_ui_elements(setup, username):
     assert driver.find_element(*products_page.cart_button).is_displayed(), f"Cart icon is missing"
     assert driver.find_element(*products_page.menu_button).is_displayed(), f"Menu button is missing"
 
-@allure.label("category", "ui")
+@allure.suite("UI Tests")
+@allure.title("All product images are displayed correctly")
 def test_images(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
 
@@ -46,9 +48,10 @@ def test_images(setup, username):
     for img in products_page.get_product_images():
         assert img.get_attribute("src") != "", f"Broken image detected"
 
-@allure.label("category", "ui")
+@allure.suite("UI Tests")
+@allure.title("Products page layout adapts to mobile and desktop screen sizes")
 def test_responsive_layout(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
 
@@ -62,9 +65,10 @@ def test_responsive_layout(setup, username):
     driver.set_window_size(1280, 800)
     assert driver.find_element(*products_page.cart_button).is_displayed(), f"Cart icon missing in desktop view"
 
-@allure.label("category", "ui")
+@allure.suite("UI Tests")
+@allure.title("Product title has correct font styling")
 def test_text_style(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
 

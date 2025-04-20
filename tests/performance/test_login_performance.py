@@ -11,8 +11,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 def setup(driver):
     yield driver
 
+@allure.suite("Performance Tests")
+@allure.title("Login performance")
 def test_login_time(setup, username, password):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
     login_page = LoginPage(driver)
@@ -27,8 +29,10 @@ def test_login_time(setup, username, password):
 
     assert login_duration <= max_login_time, f"{username} took more than {max_login_time} seconds to log in"
 
+@allure.suite("Performance Tests")
+@allure.title("Logout performance")
 def test_logout_time(setup, username, password):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
     
     driver = setup
     login_page = LoginPage(driver)

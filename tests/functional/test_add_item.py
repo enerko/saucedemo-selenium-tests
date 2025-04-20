@@ -34,9 +34,10 @@ def setup(driver, username, password):
     except:
         pass  # Already removed or not present
 
-@allure.label("category", "functional")
+@allure.suite("Functional Tests")
+@allure.title("Add backpack to cart")
 def test_add_backpack(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
     products_page = ProductsPage(driver)
@@ -45,9 +46,10 @@ def test_add_backpack(setup, username):
 
     assert products_page.get_cart_count() == 1, f"Expected 1 item in cart, found {products_page.get_cart_count()}"
 
-@allure.label("category", "functional")
+@allure.suite("Functional Tests")
+@allure.title("Remove backpack from cart")
 def test_remove_backpack(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
     products_page = ProductsPage(driver)
@@ -57,9 +59,10 @@ def test_remove_backpack(setup, username):
 
     assert products_page.is_cart_empty(), f"Expected cart to be empty, {products_page.get_cart_count()} still in cart"
 
-@allure.label("category", "functional")
+@allure.suite("Functional Tests")
+@allure.title("Continue shopping from cart")
 def test_continue_shopping(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
     products_page = ProductsPage(driver)
@@ -74,9 +77,10 @@ def test_continue_shopping(setup, username):
 
     assert "Products" in driver.page_source
 
-@allure.label("category", "functional")
+@allure.suite("Functional Tests")
+@allure.title("Complete checkout flow")
 def test_checkout(setup, username):
-    allure.dynamic.label("user", username)
+    allure.dynamic.parent_suite(f"User: {username}")
 
     driver = setup
     products_page = ProductsPage(driver)
