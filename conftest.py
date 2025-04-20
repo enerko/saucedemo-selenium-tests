@@ -9,6 +9,11 @@ from selenium.webdriver.chrome.options import Options
 def driver():
     chrome_options = Options()
 
+    # For CI
+    chrome_options.add_argument("--headless=new")  # Use `--headless=new` for recent Chrome versions
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
+
     # Disable automation detection
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
@@ -27,6 +32,6 @@ def driver():
 
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://www.saucedemo.com/")
-    print(f"Driver in test: {driver}")
+
     yield driver
     driver.quit()
