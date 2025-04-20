@@ -17,11 +17,7 @@ from pages.checkout_info_page import CheckoutInfoPage
 from pages.checkout_overview_page import CheckoutOverviewPage
 
 @pytest.fixture(scope="function")
-def setup(driver):
-    # Fetch username and password from environment variables (set in conftest.py)
-    username = "standard_user"
-    password = "secret_sauce"
-
+def setup(driver, username, password):
     # Step 1: Login
     login_page = LoginPage(driver)
     login_page.enter_username(username)
@@ -43,7 +39,7 @@ def test_add_backpack(setup):
     
     products_page.add_backpack_to_cart()
 
-    assert products_page.get_cart_count() == 1, f"Expected 1 item in cart, found {cart_num}"
+    assert products_page.get_cart_count() == 1, f"Expected 1 item in cart, found {products_page.get_cart_count()}"
 
 
 def test_remove_backpack(setup):

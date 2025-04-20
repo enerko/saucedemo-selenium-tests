@@ -8,11 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 @pytest.fixture(scope="function")
-def setup(driver):
-    # Fetch username and password from environment variables (set in conftest.py)
-    username = "standard_user"
-    password = "secret_sauce"
-
+def setup(driver, username, password):
     # Step 1: Login
     login_page = LoginPage(driver)
     login_page.enter_username(username)

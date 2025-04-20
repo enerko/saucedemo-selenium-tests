@@ -7,17 +7,12 @@ from pages.login_page import LoginPage
 from pages.cart_page import CartPage
 from selenium.webdriver.support.ui import WebDriverWait
 
-@pytest.fixture
-def credentials():
-    return "standard_user", "secret_sauce"
-
 @pytest.fixture(scope="function")
 def setup(driver):
     yield driver
 
-def test_login_time(setup, credentials):
+def test_login_time(setup, username, password):
     driver = setup
-    username, password = credentials
     login_page = LoginPage(driver)
 
     start_time = time.time()
@@ -30,9 +25,8 @@ def test_login_time(setup, credentials):
 
     assert login_duration <= max_login_time, f"{username} took more than {max_login_time} seconds to log in"
 
-def test_logout_time(setup, credentials):
+def test_logout_time(setup, username, password):
     driver = setup
-    username, password = credentials
     login_page = LoginPage(driver)
 
     login_page.login(username, password)

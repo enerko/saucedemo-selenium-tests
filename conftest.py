@@ -1,9 +1,9 @@
 import pytest
 
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+from utils.load_credentials import load_credentials_from_csv
 
 @pytest.fixture
 def driver():
@@ -35,3 +35,8 @@ def driver():
 
     yield driver
     driver.quit()
+
+def pytest_generate_tests(metafunc):
+    if "username" in metafunc.fixturenames and "password" in metafunc.fixturenames:
+        credentials = load_credentials_from_csv()
+        metafunc.parametrize("username,password", credentials)
